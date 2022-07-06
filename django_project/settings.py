@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-&$l0ls4dr2tpph8bz$&cpv7hgi@)o-anrwlvos^w@f2m=cpvy3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"] # new chap 4 - add whitenoise for supporting deploy
 
 # Application definition
 
@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "books.apps.BooksConfig", # new chap 3 - register apps
+    "books.apps.BooksConfig", # new chap 3 - register book apps
+    "rest_framework", # new chap 4 - install django rest framework
+    "apis.apps.ApisConfig", # new chap 4 - register apis app
+    "whitenoise.runserver_nostatic", # new chap 4 - add whitenoise for supporting deploy
 ]
 
 MIDDLEWARE = [
@@ -48,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware", # new chap 4 - add whitenoise for supporting deploy
 ]
 
 ROOT_URLCONF = 'django_project.urls'
@@ -122,3 +126,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_DIRS = [BASE_DIR / "static"] # new chap 4 - add whitenoise for supporting deploy
+STATIC_ROOT = BASE_DIR / "staticfiles" # new chap 4 - add whitenoise for supporting deploy
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage" # new chap 4 - add whitenoise for supporting deploy

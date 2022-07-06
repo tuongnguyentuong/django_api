@@ -21,4 +21,5 @@ from django.urls import path, include # new chap 3 - library
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("books.urls")), # new chap 3 - library
+    path("api/", include("apis.urls")), # new chap 4 - apis app
 ]
